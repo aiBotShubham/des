@@ -1,0 +1,12 @@
+{
+  "components": {},
+  "formatVersion": 1,
+  "metadata": {
+    "title": "Starter document"
+  },
+  "pages": {
+    "starter-page": "pages/page-1.starter-page.json"
+  },
+  "projectId": "ae8c853f-dd90-4f17-91a8-59f7e2800c2f",
+  "tokens": "tokens/theme.json"
+}

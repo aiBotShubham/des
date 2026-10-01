@@ -1,0 +1,370 @@
+{
+  "$defs": {
+    "component": {
+      "additionalProperties": false,
+      "properties": {
+        "definition": {
+          "additionalProperties": false,
+          "properties": {
+            "propertyDeclarations": {
+              "type": "object"
+            },
+            "recipe": {
+              "type": "object"
+            },
+            "slots": {
+              "type": "array"
+            },
+            "tree": {
+              "required": [
+                "rootNodeID",
+                "nodes"
+              ],
+              "type": "object"
+            },
+            "variantAxes": {
+              "type": "array"
+            }
+          },
+          "required": [
+            "tree",
+            "propertyDeclarations",
+            "variantAxes",
+            "recipe",
+            "slots"
+          ],
+          "type": "object"
+        },
+        "id": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "isArchived": {
+          "type": "boolean"
+        },
+        "matrix": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "name": {
+          "type": "string"
+        },
+        "pageId": {
+          "type": "string"
+        },
+        "parentComponentId": {
+          "type": "string"
+        },
+        "schemaVersion": {
+          "const": 2
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "id",
+        "name",
+        "isArchived",
+        "matrix",
+        "definition"
+      ],
+      "type": "object"
+    },
+    "componentFile": {
+      "additionalProperties": false,
+      "properties": {
+        "component": {
+          "$ref": "#/$defs/component"
+        },
+        "formatVersion": {
+          "const": 1
+        }
+      },
+      "required": [
+        "formatVersion",
+        "component"
+      ],
+      "type": "object"
+    },
+    "document": {
+      "additionalProperties": false,
+      "properties": {
+        "components": {
+          "additionalProperties": {
+            "$ref": "#/$defs/component"
+          },
+          "type": "object"
+        },
+        "metadata": {
+          "$ref": "#/$defs/metadata"
+        },
+        "nodes": {
+          "additionalProperties": {
+            "$ref": "#/$defs/node"
+          },
+          "type": "object"
+        },
+        "pages": {
+          "additionalProperties": {
+            "$ref": "#/$defs/page"
+          },
+          "type": "object"
+        },
+        "tokens": {
+          "$ref": "#/$defs/tokens"
+        }
+      },
+      "required": [
+        "metadata",
+        "pages",
+        "nodes",
+        "components",
+        "tokens"
+      ],
+      "type": "object"
+    },
+    "metadata": {
+      "additionalProperties": false,
+      "properties": {
+        "title": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "title"
+      ],
+      "type": "object"
+    },
+    "node": {
+      "description": "Authored Editor node. Tales validate checks type-specific fields, expressions, shader/SVG data, hierarchy and references.",
+      "properties": {
+        "id": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "layout": {
+          "type": "object"
+        },
+        "orderKey": {
+          "type": "string"
+        },
+        "pageId": {
+          "type": "string"
+        },
+        "parentId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "style": {
+          "type": "object"
+        },
+        "transform": {
+          "type": "object"
+        },
+        "type": {
+          "enum": [
+            "Element2D",
+            "Text2D",
+            "Component2D"
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "type",
+        "parentId",
+        "orderKey",
+        "layout",
+        "style",
+        "transform"
+      ],
+      "type": "object"
+    },
+    "page": {
+      "additionalProperties": false,
+      "properties": {
+        "backgroundColor": {
+          "type": "string"
+        },
+        "id": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "canvas",
+            "component"
+          ]
+        },
+        "modeAssignments": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "type": "object"
+        },
+        "name": {
+          "type": "string"
+        },
+        "orderKey": {
+          "type": "string"
+        },
+        "parentPageId": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "kind",
+        "name",
+        "orderKey"
+      ],
+      "type": "object"
+    },
+    "pageFile": {
+      "additionalProperties": false,
+      "properties": {
+        "formatVersion": {
+          "const": 1
+        },
+        "nodes": {
+          "additionalProperties": {
+            "$ref": "#/$defs/node"
+          },
+          "type": "object"
+        },
+        "page": {
+          "$ref": "#/$defs/page"
+        }
+      },
+      "required": [
+        "formatVersion",
+        "page",
+        "nodes"
+      ],
+      "type": "object"
+    },
+    "pathMap": {
+      "additionalProperties": {
+        "pattern": "^[^.].*\\.json$",
+        "type": "string"
+      },
+      "type": "object"
+    },
+    "singleFile": {
+      "additionalProperties": false,
+      "properties": {
+        "document": {
+          "$ref": "#/$defs/document"
+        },
+        "formatVersion": {
+          "const": 1
+        },
+        "projectId": {
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "required": [
+        "formatVersion",
+        "projectId",
+        "document"
+      ],
+      "type": "object"
+    },
+    "tokens": {
+      "additionalProperties": false,
+      "properties": {
+        "axes": {
+          "type": "object"
+        },
+        "collections": {
+          "type": "object"
+        },
+        "tokens": {
+          "type": "object"
+        },
+        "version": {
+          "const": 1
+        }
+      },
+      "required": [
+        "version",
+        "tokens",
+        "collections",
+        "axes"
+      ],
+      "type": "object"
+    },
+    "tokensFile": {
+      "additionalProperties": false,
+      "properties": {
+        "formatVersion": {
+          "const": 1
+        },
+        "tokens": {
+          "$ref": "#/$defs/tokens"
+        }
+      },
+      "required": [
+        "formatVersion",
+        "tokens"
+      ],
+      "type": "object"
+    },
+    "workspace": {
+      "additionalProperties": false,
+      "properties": {
+        "components": {
+          "$ref": "#/$defs/pathMap"
+        },
+        "formatVersion": {
+          "const": 1
+        },
+        "metadata": {
+          "$ref": "#/$defs/metadata"
+        },
+        "pages": {
+          "$ref": "#/$defs/pathMap"
+        },
+        "projectId": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "tokens": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "formatVersion",
+        "projectId",
+        "metadata",
+        "pages",
+        "components",
+        "tokens"
+      ],
+      "type": "object"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "oneOf": [
+    {
+      "$ref": "#/$defs/workspace"
+    },
+    {
+      "$ref": "#/$defs/pageFile"
+    },
+    {
+      "$ref": "#/$defs/componentFile"
+    },
+    {
+      "$ref": "#/$defs/tokensFile"
+    },
+    {
+      "$ref": "#/$defs/singleFile"
+    }
+  ],
+  "title": "Tales source format v1"
+}
